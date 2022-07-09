@@ -1,0 +1,62 @@
+{% extends 'main.html' %}
+
+{% block content%}
+
+<style>
+    .prod_view {
+ 
+    display: grid;
+    
+    grid-template-columns: repeat(2, 1fr);
+    
+    grid-auto-rows: auto;
+    
+    grid-gap: 1rem;
+
+    }
+</style>
+<div class="home-container pt-5 mt-5">
+
+    <div class="container pt-4 mt-5 py-2">
+                    
+        <div class="card">
+            <div >
+    
+                <div class="card-header bg-light text-primary d-flex justify-content-evenly">
+                    <p>{{job.Job_Title}}</p>
+                    
+                </div>
+                <div class="prod_view">                 
+                    <div class="info">
+                        <div class="card-body"> 
+                            <div class="card text-center m-2">
+        
+                                <p>{{job.category.name}}</p>
+                                <div class="card-footer text-muted ">
+                                    <p>{{job.job_description}}</p>
+                
+                                </div>
+            
+                            </div>
+                        </div>
+    
+                        <div class="to_cart">
+                            <a class="nav-item nav-link text-center" href="#"> Add List</a>
+                        </div>
+                    </div>
+                </div>
+    
+    
+            </div>
+            
+        
+        </div>
+    
+    
+    </div>
+
+</div>
+
+
+
+{% endblock %}

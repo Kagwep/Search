@@ -1,0 +1,84 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    .home-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+
+  
+</style>
+
+
+    <div class="home-container py-5 my-5 bg-light my-md-4 bd-layout "> 
+
+        <aside class="bd-sidebar my-5">
+            <div class="m-2 mx-5 bg-white border-bottom-0" id="cat">
+                <h5 class="bg-primary rounded-3 text-light px-2 py-2"> Categories </h5>
+                <hr>
+                <div>
+                    <a class="p-2"  href="{% url 'home'%}">All</a>
+                </div>
+        
+                {% for category in categories %}
+                    <div>
+                        <a class="p-2" href="{% url 'home'%}?q={{category.name}}">{{category.name}}</a>
+                    </div>
+        
+                {% endfor %}
+        
+            </div>
+
+        </aside>
+
+
+
+        <div class="card my-5">
+    
+    
+            <!-- <div class="card-header">
+                <div class="p-2">
+                    {{product_count}} product(s) available
+                </div>
+            </div> -->
+            <form method="get" action="{%url 'home'%}">
+                <input type="text" name = "q" class="form-control rounded-3  " placeholder="search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                </form>
+                <h5 class="bg-light rounded-3 text-dark px-2 py-2 d-flex justify-content-center ">{{jobs_count}} Job(s) advert available</h5>
+
+                {% for job in jobs %}
+                <div class="card m-2">
+                    <div class="card-header p-0 px-2">
+                        <h6 class=""><a href="{% url 'view-job' job.id %}"> {{job.Job_Title}} </a></h6>
+                    </div>
+                    <div class="card-body p-2">
+                        <!-- <h6 class="card-title"><span> @ {{job.owner.username}}</span></h6> -->
+                      <h6 class="card-title">{{job.Company_name}}</h6>
+                      <p class="card-text">{{job.short_description}}.</p>
+                      <a href="{% url 'view-job' job.id %}" class="btn btn-warning p-0 transition-3d-hover px-2">view additional info...</a>
+                      {% if request.user == job.host %}
+                      <a class="link-primary m-2 " href="{% url 'update-room' product.id %}"> Edit </a>
+                      <a class="link-primary m-2 " href="{% url 'delete-room' product.id %}"> Delete </a>
+                      {% endif %}
+                    </div>
+
+                  </div>
+                {% endfor %}
+
+        </div>
+
+        <div class=" mx-2 bg-white p-2 my-5">
+            <h5 class="bg-warning rounded-3 text-dark py-2 px-2"> Notice </h5>
+            <hr>
+    
+        </div>
+        
+ 
+
+</div>
+
+
+
+{% endblock content %}
