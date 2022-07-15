@@ -2,6 +2,8 @@
 import email
 from pyexpat import model
 from django.db import models
+from ckeditor.fields import RichTextField
+
 
 # Create your models here.
 from django.db.models.deletion import CASCADE, SET_NULL
@@ -94,7 +96,9 @@ class Jobs(models.Model):
     Company_name = models.CharField(max_length=200,verbose_name='company name')
     Job_category = models. ForeignKey(jobCategory, on_delete= models.SET_NULL, null = True)
     short_description = models.TextField()
-    job_description = models.TextField()
+    job_description = RichTextField()
+    date_added = models.DateField(auto_now_add=True)
+    is_active = models.BooleanField(default= True)
 
     def __str__(self):
         return self.Job_Title

@@ -1,43 +1,47 @@
 {% extends 'main.html' %}
 
 {% block content%}
-
 <style>
-    .prod_view {
- 
-    display: grid;
-    
-    grid-template-columns: repeat(2, 1fr);
-    
-    grid-auto-rows: auto;
-    
-    grid-gap: 1rem;
-
+    .status{
+        font-size: .77rem; 
+        font-weight: bold; 
+        text-align: center;
     }
 </style>
+
 <div class="home-container pt-5 mt-5">
 
     <div class="container pt-4 mt-5 py-2">
-                    
+        <div class="row">
+            <div class="col text-center">
+              <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                <h6 class="fw-bold"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                    class="rounded-circle img-fluid" style="width: 20px;"> {{job.Company_name}}</h6>
+              </nav>
+            </div>
+        </div>
+        <div class="status">
+            {% if job.is_active is True %}
+            <p class="p-0 text-white bg-primary" style="font-size: .77rem;"> Active </p>
+           {% else %}
+            <p class=" p-0 text-danger bg-light "> Not hiring at the moment </p>
+           {% endif %}
+        </div>
+
         <div class="card">
+
             <div >
     
                 <div class="card-header bg-light text-primary d-flex justify-content-evenly">
                     <p>{{job.Job_Title}}</p>
                     
                 </div>
+                <p>{{job.category.name}}</p>
                 <div class="prod_view">                 
                     <div class="info">
                         <div class="card-body"> 
-                            <div class="card text-center m-2">
-        
-                                <p>{{job.category.name}}</p>
-                                <div class="card-footer text-muted ">
-                                    <p>{{job.job_description}}</p>
-                
-                                </div>
-            
-                            </div>
+                              
+                                 <p>{{job.job_description|safe}}</p>
                         </div>
     
                         <div class="to_cart">

@@ -11,6 +11,8 @@ urlpatterns = [
     path ('add-job', views.addJob, name= 'add-job'),
     path('jobs/', views.home, name = "jobs"),
     path('jobs/view-job/<str:pk>/', views.ViewJob, name = "view-job"),
+    path("user/",views.userProfile,name="userprofile"),
+    path("wall/",views.viewWall,name="wall"),
     
     
     ]

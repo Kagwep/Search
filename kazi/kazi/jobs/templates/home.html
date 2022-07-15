@@ -1,84 +1,142 @@
 {% extends 'main.html' %}
 
 {% block content %}
-
 <style>
-    .home-container{
-        display: grid;
-        grid-template-columns: 1fr 3fr 1fr;
+  .navside{
+    position: relative;
+    margin-left: 100px;
+  }
+   @media screen and (max-width: 1500px) {
+      .navside {
+        position: relative;
+        width: auto;
+        bottom: 0; 
+        margin-left: 10px;
+      } 
     }
-
-  
 </style>
+<section style="background-color: rgb(211, 211, 211);" >
 
+  <div class="mx-2 py-5 mt-5 my-0" >
 
-    <div class="home-container py-5 my-5 bg-light my-md-4 bd-layout "> 
-
-        <aside class="bd-sidebar my-5">
-            <div class="m-2 mx-5 bg-white border-bottom-0" id="cat">
-                <h5 class="bg-primary rounded-3 text-light px-2 py-2"> Categories </h5>
-                <hr>
-                <div>
-                    <a class="p-2"  href="{% url 'home'%}">All</a>
-                </div>
+    <div class="row">
+      <div class="col-lg-3">
         
+        <div class="navside">
+          <!-- Sidebar -->
+          <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white  rounded-3 p-3 mb-4 ">
+            <div class="position-sticky">
+              <div class="list-group list-group-flush mx-3 mt-4 ">
+                <h6 class="text-primary fw-bold font-italic m-0 p-0 px-2" > Categories </h6>
+
+                <a href="{% url 'home'%}" class="list-group-item list-group-item-action py-2 bg-light text-dark ripple active">
+                  <i class="fas fa-chart-area fa-fw me-3"></i><span> All </span>
+                </a>
                 {% for category in categories %}
-                    <div>
-                        <a class="p-2" href="{% url 'home'%}?q={{category.name}}">{{category.name}}</a>
-                    </div>
-        
+                <a href="{% url 'home'%}?q={{category.name}}" class="list-group-item list-group-item-action py-2 ripple"
+                  ><i class="fas fa-lock fa-fw me-3"></i><span>{{category.name}}</span></a
+                >
                 {% endfor %}
-        
+              </div>
             </div>
+            <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white ">
+              <div class="position-sticky">
+                <div class="list-group list-group-flush mx-3 mt-4">
+                  <h6 class="text-primary fw-bold font-italic m-0 p-0 px-2" > location </h6>
 
-        </aside>
-
-
-
-        <div class="card my-5">
-    
-    
-            <!-- <div class="card-header">
-                <div class="p-2">
-                    {{product_count}} product(s) available
+                  <a href="{% url 'home'%}" class="list-group-item list-group-item-action py-2 bg-light text-dark ripple active">
+                    <i class="fas fa-chart-area fa-fw me-3"></i><span> All </span>
+                  </a>
+                  {% for category in categories %}
+                  <a href="{% url 'home'%}?q={{category.name}}" class="list-group-item list-group-item-action py-2 ripple"
+                    ><i class="fas fa-lock fa-fw me-3"></i><span>{{category.name}}</span></a
+                  >
+                  {% endfor %}
                 </div>
-            </div> -->
-            <form method="get" action="{%url 'home'%}">
+              </div>
+            </nav>
+            <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white ">
+              <div class="position-sticky">
+                <div class="list-group list-group-flush mx-3 mt-4">
+                  <h6 class="text-primary fw-bold font-italic m-0 p-0 px-2" > Company </h6>
+
+                  <a href="{% url 'home'%}" class="list-group-item list-group-item-action py-2 bg-light text-dark ripple active">
+                    <i class="fas fa-chart-area fa-fw me-3"></i><span> All </span>
+                  </a>
+                  {% for category in categories %}
+                  <a href="{% url 'home'%}?q={{category.name}}" class="list-group-item list-group-item-action py-2 ripple"
+                    ><i class="fas fa-lock fa-fw me-3"></i><span>{{category.name}}</span></a
+                  >
+                  {% endfor %}
+                </div>
+              </div>
+            </nav>
+          </nav>
+        </div>
+
+      </div>
+      <div class="col-lg-6 mx-0">
+        <div class="row">
+          <div class="col">
+            <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+              <form method="get" action="{%url 'home'%}">
                 <input type="text" name = "q" class="form-control rounded-3  " placeholder="search" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                </form>
-                <h5 class="bg-light rounded-3 text-dark px-2 py-2 d-flex justify-content-center ">{{jobs_count}} Job(s) advert available</h5>
-
-                {% for job in jobs %}
-                <div class="card m-2">
-                    <div class="card-header p-0 px-2">
-                        <h6 class=""><a href="{% url 'view-job' job.id %}"> {{job.Job_Title}} </a></h6>
-                    </div>
-                    <div class="card-body p-2">
-                        <!-- <h6 class="card-title"><span> @ {{job.owner.username}}</span></h6> -->
-                      <h6 class="card-title">{{job.Company_name}}</h6>
-                      <p class="card-text">{{job.short_description}}.</p>
-                      <a href="{% url 'view-job' job.id %}" class="btn btn-warning p-0 transition-3d-hover px-2">view additional info...</a>
-                      {% if request.user == job.host %}
-                      <a class="link-primary m-2 " href="{% url 'update-room' product.id %}"> Edit </a>
-                      <a class="link-primary m-2 " href="{% url 'delete-room' product.id %}"> Delete </a>
-                      {% endif %}
-                    </div>
-
-                  </div>
-                {% endfor %}
-
+            </form>
+            <h5 class="bg-light rounded-3 text-dark px-2 py-2 d-flex justify-content-center ">{{jobs_count}} Job(s) advert available</h5>
+            </nav>
+          </div>
         </div>
+       
+        <div class="card-container">
+          {% for job in jobs %}
+          <div class="card mb-4 p-0">
+            
+            <div class="card-body text-center p-0">
 
-        <div class=" mx-2 bg-white p-2 my-5">
-            <h5 class="bg-warning rounded-3 text-dark py-2 px-2"> Notice </h5>
-            <hr>
-    
-        </div>
-        
+              <h6 class="bg-light rounded-3 p-2 mb-4"><a href="{% url 'view-job' job.id %}"> {{job.Job_Title}} </a></h6>
  
-
+              <h6 class="fw-bold"><img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                class="rounded-circle img-fluid" style="width: 20px;"> {{job.Company_name}}</h6>
+              <p class="text-muted mb-4">{{job.short_description}}.</p>
+              <div class="d-flex justify-content-center mb-2">
+                <a href="{% url 'view-job' job.id %}" class="btn btn-outline-primary ms-1">view additional info...</a>
+                {% if request.user == job.host %}
+                <a class="btn btn-primary m-2 " href="{% url 'update-room' product.id %}"> Edit </a>
+                <a class="btn btn-outline-primary ms-1" href="{% url 'delete-room' product.id %}"> Delete </a>
+                {% endif %}
+              </div>
+              <hr>
+              <div class="d-flex justify-content-evenly ">
+                <h6 class="p-0 m-0 bg-light"> Posted :<p class="p-0 text-primary" style="font-size: .77rem;"> {{job.date_added}}.</p></h6>
+                {% if job.is_active is True %}
+                <h6 class="p-0 m-0 bg-light"> Status :<p class="p-0 text-primary" style="font-size: .77rem;"> Active </p></h6>
+                {% else %}
+                <h6 class="p-0 m-0 bg-light"> Status :<p class=" p-0 text-primary" style="font-size: .77rem;"> Not hiring at the moment </p></h6>
+                {% endif %}
+              </div>
+            </div>
+           
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="card mb-4 mb-md-0">
+          <div class="card-body">
+            <h5 class="text-primary font-italic me-1"> Notice </h5>
+            <div>
+              <a class="p-2 "  href="{% url 'home'%}">All</a>
+            </div>            
+            {% for category in categories %}
+            <div>
+              <p class="mb-1" style="font-size: .77rem;"><a class="p-2" href="{% url 'home'%}?q={{category.name}}">{{category.name}}</a></p>
+            </div>
+            
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
-
-
-
+</section>
 {% endblock content %}

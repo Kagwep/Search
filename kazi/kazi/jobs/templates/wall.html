@@ -1,0 +1,172 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style> 
+
+.cardc  {
+ 
+  display: grid;
+  
+  grid-template-columns: repeat(4, 1fr);
+  
+  grid-auto-rows: auto;
+  
+  grid-gap: 1rem;
+
+   }
+   @media screen and (max-width: 800px) {
+
+    .cardc{
+      display: block;
+      margin: 1rem;
+    }
+    .cardc .card{
+      margin: 1rem;
+
+    }
+
+   }
+   </style>
+
+<section  style="background-color: #eee;">
+    <div class="mx-2 py-5 mt-5 my-0 pt-5">
+      <div class="row">
+        <div class="col-sm-2 ">
+          <div class="navside">
+            <!-- Sidebar -->
+            <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white  rounded-3 p-3 mb-4 ">
+              <div class="position-sticky">
+                <div class="list-group list-group-flush mx-3 mt-4 ">
+                  <h6 class="text-primary fw-bold font-italic m-0 p-0 px-2" > Categories </h6>
+  
+                  <a href="{% url 'home'%}" class="list-group-item list-group-item-action py-2 bg-light text-dark ripple active">
+                    <i class="fas fa-chart-area fa-fw me-3"></i><span> All </span>
+                  </a>
+                  {% for category in categories %}
+                  <a href="{% url 'home'%}?q={{category.name}}" class="list-group-item list-group-item-action py-2 ripple"
+                    ><i class="fas fa-lock fa-fw me-3"></i><span>{{category.name}}</span></a
+                  >
+                  {% endfor %}
+                </div>
+              </div>
+              <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white ">
+                <div class="position-sticky">
+                  <div class="list-group list-group-flush mx-3 mt-4">
+                    <h6 class="text-primary fw-bold font-italic m-0 p-0 px-2" > location </h6>
+  
+                    <a href="{% url 'home'%}" class="list-group-item list-group-item-action py-2 bg-light text-dark ripple active">
+                      <i class="fas fa-chart-area fa-fw me-3"></i><span> All </span>
+                    </a>
+                    {% for category in categories %}
+                    <a href="{% url 'home'%}?q={{category.name}}" class="list-group-item list-group-item-action py-2 ripple"
+                      ><i class="fas fa-lock fa-fw me-3"></i><span>{{category.name}}</span></a
+                    >
+                    {% endfor %}
+                  </div>
+                </div>
+              </nav>
+              <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white ">
+                <div class="position-sticky">
+                  <div class="list-group list-group-flush mx-3 mt-4">
+                    <h6 class="text-primary fw-bold font-italic m-0 p-0 px-2" > Company </h6>
+  
+                    <a href="{% url 'home'%}" class="list-group-item list-group-item-action py-2 bg-light text-dark ripple active">
+                      <i class="fas fa-chart-area fa-fw me-3"></i><span> All </span>
+                    </a>
+                    {% for category in categories %}
+                    <a href="{% url 'home'%}?q={{category.name}}" class="list-group-item list-group-item-action py-2 ripple"
+                      ><i class="fas fa-lock fa-fw me-3"></i><span>{{category.name}}</span></a
+                    >
+                    {% endfor %}
+                  </div>
+                </div>
+              </nav>
+            </nav>
+          </div>
+        </div>
+        <div class="col-sm-8">
+          <div class="row">
+            <div class="col">
+              <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+                <form method="get" action="{%url 'home'%}">
+                  <input type="text" name = "q" class="form-control rounded-3  " placeholder="search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+              </form>
+              <h5 class="bg-light rounded-3 text-dark px-2 py-2 d-flex justify-content-center ">{{jobs_count}} freelancers available</h5>
+              </nav>
+            </div>
+          </div>
+          <div class="conts">
+            <div class="row h-100 bg-light rounded-3 p-2">
+              <div class="cardc">
+                {% for ks in kazi_users %}
+                <div class="col">
+                  
+                  <div class="seek">
+                    <div class="card" style="border-radius: 15px; background-color: #93e2bb;">
+                      <div class="card-body p-4 text-black">
+                        <div>
+                          <h6 class="mb-4">{{ks.First_name}} {{ks.Last_Name}}</h6>
+                          <div class="d-flex align-items-center justify-content-between mb-3">
+                            <p class="small mb-0"><i class="far fa-clock me-2"></i>3 hrs</p>
+                            <p class="fw-bold mb-0">$90</p>
+                          </div>
+                        </div>
+                        <div class="flex-shrink-0">
+                          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-2.webp"
+                            alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3"
+                            style="width: 50px;">
+                        </div>
+                        <div class="d-flex align-items-center mb-4">
+                          <div class="flex-grow-1 ms-3">
+                            <div class="d-flex flex-row align-items-center mb-2">
+                              <p class="mb-0 me-2">@{{ks.username}}</p>
+                              <ul class="mb-0 list-unstyled d-flex flex-row" style="color: #1B7B2C;">
+                                <li>
+                                  <i class="fas fa-star fa-xs"></i>
+                                </li>
+                                <li>
+                                  <i class="fas fa-star fa-xs"></i>
+                                </li>
+                                <li>
+                                  <i class="fas fa-star fa-xs"></i>
+                                </li>
+                                <li>
+                                  <i class="fas fa-star fa-xs"></i>
+                                </li>
+                                <li>
+                                  <i class="fas fa-star fa-xs"></i>
+                                </li>
+                              </ul>
+                            </div>
+                            <div>
+                              <button type="button" class="btn btn-outline-dark btn-rounded btn-sm"
+                                data-mdb-ripple-color="dark">+ Follow</button>
+                              <button type="button" class="btn btn-outline-dark btn-rounded btn-sm"
+                                data-mdb-ripple-color="dark">See profile</button>
+                              <button type="button" class="btn btn-outline-dark btn-floating btn-sm"
+                                data-mdb-ripple-color="dark"><i class="fas fa-comment"></i></button>
+                            </div>
+                          </div>
+                        </div>
+                        <hr>
+                        <p class="my-4 pb-1">52 comments</p>
+                        <button type="button" class="btn btn-success btn-rounded btn-block btn-lg"><i
+                            class="far fa-clock me-2"></i>Book now</button>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+                {% endfor %}
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  </section>
+
+{% endblock content %}
